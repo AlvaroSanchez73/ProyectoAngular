@@ -1,0 +1,52 @@
+<table>
+    <tr>
+        <td> 
+             Responsable Proyecto:
+        </td>
+    </tr>
+    <tr>
+        <td> 
+            Coordinador Financiero del Programa:
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Analista Control Rendiciones:
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Otros Contactos 
+            <button mat-icon-button color="primary"  (click)="addUser()">
+                <mat-icon >add_circle_outline</mat-icon>
+            </button>
+        </td>
+        <div *ngFor="let contacto of contactos; let i = index">
+            <td>
+                <mat-form-field>
+                    <input matInput placeholder="Nombre"  [(ngModel)]="contacto.nombre">
+                </mat-form-field>
+            </td> 
+            <td>
+                <mat-form-field>
+                    <input matInput placeholder="Correo"  [(ngModel)]="contacto.correo">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field>
+                    <input matInput placeholder="Teléfono"  [(ngModel)]="contacto.telefono">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field>
+                    <input matInput placeholder="Cargo"  [(ngModel)]="contacto.cargo">
+                </mat-form-field>
+            </td>
+            <td>        
+                <button mat-icon-button color="primary" (click)="removeUser(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+    </div>
+    </tr>
+</table>

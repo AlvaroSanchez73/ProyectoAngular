@@ -1,0 +1,154 @@
+<router-outlet></router-outlet>
+<mat-card>
+	<h2>Declaración de Gastos</h2>
+	<mat-divider [inset]="true"></mat-divider>
+	<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" class="margin-top-10">
+		<table>
+			<tr>
+				<td>N°</td>
+				<td>
+					<app-filter></app-filter>
+				</td>
+				<td>Duracion :</td>
+				<td>{{project.duration}}</td>
+			</tr>
+			<tr>
+				<td>Fecha Inicio:</td>
+				<td>{{project.start_date}}</td>
+				<td>Fecha Término:</td>
+				<td>{{project.end_date}}</td>
+			</tr>
+		</table>
+		<div class="col-md-2">
+			<button mat-raised-button color="primary" style="margin-top: 10px; left: 10px"
+				(click)='filterElements()'>buscar</button>
+		</div>
+	</div>
+
+	<mat-card>
+		<div class="mat-elevation-z8">
+			<mat-table [dataSource]="dataSource">
+				<ng-container matColumnDef="report_number">
+					<mat-header-cell *matHeaderCellDef> Informe </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="report_number">
+						{{val.NUMERO_INFORME}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="start_date">
+					<mat-header-cell *matHeaderCellDef> Fecha Inicio </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="start_date">
+						{{val.FECHA_INICIO_RENDICION}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="end_date">
+					<mat-header-cell *matHeaderCellDef> Fecha Término </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="end_date">
+						{{val.FECHA_FIN_RENDICION}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="duration">
+					<mat-header-cell *matHeaderCellDef> Año - Periodo </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="duration">
+						{{val.PERIODO}}
+					</mat-cell>
+				</ng-container>
+				<!--(checked)="selection.hasValue() &&  ischeckDeclaraciones()"-->
+				<ng-container matColumnDef="declaraciones">
+					<mat-header-cell *matHeaderCellDef> Declaraciones </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="declaraciones">
+						<mat-checkbox [disabled]="val.FECHA_ENVIO_DAF != undefined" [(ngModel)]="val.DECLARACIONES">
+						</mat-checkbox>
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="enviar">
+					<mat-header-cell *matHeaderCellDef>Enviar a DAF </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="enviar">
+						<mat-checkbox [disabled]="val.FECHA_ENVIO_DAF != undefined" [(ngModel)]="val.ENVIAR_DAF"
+							(change)="ischeckDaf(val)">
+						</mat-checkbox>
+
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="total_approved">
+					<mat-header-cell *matHeaderCellDef> Monto Declarado </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="trim">
+						{{val.MONTO_GASTADO}} / {{val.MONTO_INDIVIDUAL_GIRO}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="amount">
+					<mat-header-cell *matHeaderCellDef> Monto del Giro </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="trim">
+						{{val.MONTO_DECLARADO_TOTAL}} / {{project.sumaTotal}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="programa">
+					<mat-header-cell *matHeaderCellDef> Recibida Programa </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="programa">
+						<mat-form-field class="datepicker">
+							<input matInput [matDatepicker]="picker" placeholder="Fecha Programa"
+							(change)="ischeckDaf(val)"	[disabled]="val.FECHA_ENVIO_DAF != undefined"	[(ngModel)]="val.FECHA_RECIBIDA_PROGRAMA">
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="envioDaf">
+					<mat-header-cell *matHeaderCellDef> envio a Daf </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="trim">
+						{{val.FECHA_ENVIO_DAF}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="daf">
+					<mat-header-cell *matHeaderCellDef> Recibida DAF</mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="daf">
+						<mat-form-field class="datepicker">
+							<input matInput [matDatepicker]="picker" placeholder="Fecha Recibida"
+							(change)="ischeckDaf(val)" [disabled]="val.FECHA_ENVIO_DAF != undefined"	[(ngModel)]="val.FECHA_RECEPCION_DAF">
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+					</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="select">
+			<mat-header-cell *matHeaderCellDef>
+				<mat-checkbox (change)="$event ? masterToggle() : null"
+				[checked]="selection.hasValue() && isAllSelected()"
+				[indeterminate]="selection.hasValue() && !isAllSelected()">
+  				</mat-checkbox>
+			</mat-header-cell>
+			<mat-cell *matCellDef="let val" data-label="select">
+				<mat-checkbox (click)="$event.stopPropagation()"
+				(change)="$event ? selection.toggle(val) : null"
+				[checked]="selection.isSelected(val)">
+ 				 </mat-checkbox>
+			</mat-cell>
+		</ng-container>
+				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+				<mat-row *matRowDef="let row; columns:  displayedColumns;"></mat-row>
+			</mat-table>
+			<mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="0" [pageSize]="5" showFirstLastButtons>
+			</mat-paginator>
+		</div>
+	</mat-card>
+	<button mat-raised-button color="primary" style="margin-left: 50%; margin-top: 20px; width: 100px"
+	 	(click)='enviarDaf() '[disabled]="isDisable == false"	 >Enviar</button>
+	<mat-card>
+		<div class="btnAdd">
+			<button mat-fab color="primary" (click)='descargarXls()' matTooltip="Exportar a Excel">
+				<img src="https://img.icons8.com/officexs/30/000000/xls.png">
+			</button>
+			<button mat-fab color="primary" matTooltip="Exportar a PDF">
+				<img src="https://img.icons8.com/officexs/30/000000/pdf-2.png">
+			</button>
+		</div>
+	</mat-card>
+	

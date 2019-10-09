@@ -1,0 +1,11 @@
+/* .mat-header-cell {
+    background-color: #5D4EF7 ;
+    color: ivory;
+  }
+ */
+ .mat-cell{
+  font-size: 12px;
+}
+mat-checkbox{
+  margin-left: 30%;
+}

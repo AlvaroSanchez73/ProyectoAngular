@@ -1,0 +1,18 @@
+<mat-drawer-container class="container-drawer bggray" autosize fullscreen [hasBackdrop]="true">
+    <div class="spinner-seccion" [fxLayout]="direction" fxLayoutAlign="center center" *ngIf="utils.spinner">
+        <mat-spinner [diameter]="60"></mat-spinner>
+    </div>
+    <mat-drawer #drawer class="sidenav" mode="push" [(opened)]="utils.sideNav">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <app-navbar class="navbar-mobile"></app-navbar>
+    <div class="container section-router">
+        <div class="protector" *ngIf="utils.progress">
+            <mat-progress-bar mode="query" mode="indeterminate"></mat-progress-bar>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+    <mat-drawer position="end" #drawer mode="push" class="sidenav" [(opened)]="utils.appNav">
+        <app-appnav></app-appnav>
+    </mat-drawer>
+</mat-drawer-container>

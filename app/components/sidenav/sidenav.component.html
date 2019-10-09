@@ -1,0 +1,79 @@
+
+	<img src="https://servicios.conicyt.cl/web//mantenedor-generico/assets/img/logo.png" class="logo">
+	<h2 class="mat-caption smtxt" mat-item>Opciones</h2>
+	<mat-accordion>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				 <mat-panel-title>
+					 Información del Proyecto
+				</mat-panel-title>
+			</mat-expansion-panel-header>
+			
+			</mat-expansion-panel>
+			<mat-expansion-panel>
+		  <mat-expansion-panel-header>
+			<mat-panel-title>
+				Remesas
+			</mat-panel-title>
+		  </mat-expansion-panel-header>
+		
+		</mat-expansion-panel>
+		<mat-expansion-panel >
+		  <mat-expansion-panel-header>
+			<mat-panel-title>
+				Garantías
+			</mat-panel-title>
+		  </mat-expansion-panel-header>
+		  
+		</mat-expansion-panel>
+
+			<mat-expansion-panel>
+		  <mat-expansion-panel-header>
+			<mat-panel-title>
+				Declaración de Gastos
+			</mat-panel-title>
+		  </mat-expansion-panel-header>
+		  
+		  <ul>
+			<li><a matLine [routerLink] ="['']">Revisar Declaración Vigente</a></li>
+			<li><a matLine [routerLink] ="['']">Modificar Documentos</a></li>
+			<li><a matLine [routerLink] ="['/declaraciones-de-gastos/enviar-declaraciones-daf']">Enviar Declaración a DAF</a></li>
+			<li><a matLine [routerLink] ="['']">Reportes</a></li>
+		  </ul>
+		  
+		</mat-expansion-panel>
+		<mat-expansion-panel>
+		  <mat-expansion-panel-header>
+			<mat-panel-title>
+			  Rendiciones
+			</mat-panel-title>
+		  </mat-expansion-panel-header>
+		  <ul>
+			<li><a matLine [routerLink] ="['/rendiciones/resumen-de-giros']">Resumen de Giros</a></li>
+			<li><a matLine [routerLink] ="['']">Rendiciones por Aprobación</a></li>
+			<li><a matLine [routerLink] ="['/rendiciones/revisar-rendiciones']">Revisar Rendiciones</a></li>
+		  </ul>
+		</mat-expansion-panel>
+		 <mat-expansion-panel>
+		  <mat-expansion-panel-header>
+			<mat-panel-title>
+			  Reintegros
+			</mat-panel-title>
+		  </mat-expansion-panel-header>
+		 
+		</mat-expansion-panel>
+		<mat-expansion-panel>
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				Presupuesto
+			</mat-panel-title>
+			</mat-expansion-panel-header>
+				
+			</mat-expansion-panel>
+	  </mat-accordion>
+	  <div style="text-align: right; padding:15px 8px">
+		<button mat-icon-button (click)="utils.hideSideNav()">
+	    <mat-icon>close</mat-icon>
+	  </button>
+	</div>
+

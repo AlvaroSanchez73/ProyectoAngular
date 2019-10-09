@@ -1,0 +1,11 @@
+<h2 class="mat-caption smtxt" mat-item>Aplicaciones Conicyt</h2>
+<mat-nav-list>
+<mat-list-item *ngFor="let item of appMenu">
+   <a matLine href="{{item.url}}" target="_blank">{{item.name}}</a>
+</mat-list-item>
+</mat-nav-list>
+<div style="text-align: left; padding:15px 8px">a
+  <button mat-icon-button (click)="utils.hideAppNav()">
+  <mat-icon>close</mat-icon>
+</button>
+</div>

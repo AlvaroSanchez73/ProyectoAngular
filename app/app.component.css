@@ -1,0 +1,19 @@
+
+.container{padding:20px}
+.container-form{padding: 5px 0px}
+.container-drawer{background:#fff !important}
+
+.spinner-seccion{background: rgba(255,255,255,0.9); position: fixed; z-index:999; top:0px; left:0px; width: 100%; height:100%;}
+.margin-top-10{margin-top:10px !important;}
+
+.mat-drawer-content{background: #f1f2f2 !important}
+.mat-form-field{width: 100% !important}
+
+.container-max{width: 90%; margin:0px auto; }
+
+.bggray{background: #f1f2f2 !important}
+
+.sidenav { padding: 0px; max-width: 240px; width: 100%; }
+
+
+form{margin: 15px 0px;}

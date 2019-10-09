@@ -1,0 +1,79 @@
+<div class="mat-elevation-z8" class="partTab">
+<mat-progress-bar mode="indeterminate" *ngIf="loader"></mat-progress-bar>
+  <mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef> Nombre</mat-header-cell>
+      <mat-cell *matCellDef="let val" data-label="Nombre"> {{val.nombre}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="apellido">
+      <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+      <mat-cell *matCellDef="let val" data-label="Apellido"> {{val.apellido}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="run">
+      <mat-header-cell *matHeaderCellDef> RUN </mat-header-cell>
+      <mat-cell *matCellDef="let val" data-label="RUN"> {{val.run}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="genero">
+      <mat-header-cell *matHeaderCellDef> Género </mat-header-cell>
+      <mat-cell *matCellDef="let val" data-label="Género"> {{val.genero}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let val" data-label="Email"> {{val.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
+      <mat-cell *matCellDef="let val" data-label="Teléfono"> {{val.telefono}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="establecimiento">
+      <mat-header-cell *matHeaderCellDef> Establecmiento </mat-header-cell>
+      <mat-cell *matCellDef="let val" data-label="Establecimiento"> {{val.establecimiento}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tipoParticipante">
+      <mat-header-cell *matHeaderCellDef> Tipo de Participante </mat-header-cell>
+      <mat-cell *matCellDef="let val" data-label="Tipo de Participante"> {{val.tipoParticipante}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="acciones">
+      <mat-header-cell *matHeaderCellDef > Acciones </mat-header-cell>
+      <mat-cell *matCellDef="let val"> 
+        <button mat-icon-button [matMenuTriggerFor]="menu"  *ngIf="displayButton">
+			  <mat-icon>more_vert</mat-icon>
+			</button>
+      <mat-icon *ngIf="!displayButton" matTooltip="Registro solo lectura" [matTooltipPosition]="'left'">not_interested</mat-icon>
+			<mat-menu #menu="matMenu">
+			  <button mat-menu-item (click)="openform()">
+			    <mat-icon>create</mat-icon>
+			    <span>Editar</span>
+			  </button>
+			  <button mat-menu-item>
+			    <mat-icon>clear</mat-icon>
+			    <span>Eliminar</span>
+			  </button>
+			</mat-menu>
+		</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+	<div style="text-align: right; margin-top: 20px" *ngIf="displayButton">
+		<button mat-fab color="primary" matTooltip="Cargar Participantes" (click)="loadFile()" style="margin-right: 10px">
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
+    <button mat-fab color="primary" matTooltip="Agregar Nuevo Participante" (click)="openform()">
+	    	<mat-icon>add</mat-icon>
+	  </button>
+	</div>
+  <input type="file" id="participantes" hidden (change)="fileChange($event.target.files)">
+</div>

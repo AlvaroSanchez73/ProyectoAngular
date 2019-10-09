@@ -1,0 +1,94 @@
+<router-outlet></router-outlet>
+<mat-card>
+	<h2>Resumen de Giros</h2>
+	<mat-divider [inset]="true"></mat-divider>
+	<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" class="margin-top-10">
+				<app-filter-rendiciones></app-filter-rendiciones>
+		<div class="col-md-2">
+			<button mat-raised-button color="primary" style="margin-top: 10px; left: 10px"
+			 (click)='filterElements()'>buscar</button>
+		</div>
+	</div>
+
+	<mat-card>
+		<div class="mat-elevation-z8">
+			<mat-table [dataSource]="dataSource">
+				<ng-container matColumnDef="programa">
+					<mat-header-cell *matHeaderCellDef> Programa </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="programa">
+							{{val.PROGRAMA}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="beneficiario">
+					<mat-header-cell *matHeaderCellDef> Beneficiario </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="beneficiario">
+						{{val.BENEFICIARIO}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="numGiro">
+					<mat-header-cell *matHeaderCellDef> Nro. Giro </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="numGiro">
+						{{val.NUMERO_GIRO}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="fechaGiro">
+					<mat-header-cell *matHeaderCellDef> Fecha Giro </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="fechaGiro">
+						{{val.FECHA_GIRO}}
+					</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="montoGiro">
+					<mat-header-cell *matHeaderCellDef> Monto Giro </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="montoGiro">
+							{{val.MONTO_GIRO}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="MontoAprobado">
+					<mat-header-cell *matHeaderCellDef> Monto Aprobado Rendicion </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="MontoAprobado">
+							{{val.MONTO_APROBADO}}
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="Reintegros">
+					<mat-header-cell *matHeaderCellDef> Reintegros (RIC) </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="Reintegros">
+						{{val.REINTEGROS_RIC}} 
+					</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="saldo">
+					<mat-header-cell *matHeaderCellDef> Saldo </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="saldo">
+							{{val.SALDO}}
+					</mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="devolverPrograma">
+					<mat-header-cell *matHeaderCellDef> Devolver Programa </mat-header-cell>
+					<mat-cell *matCellDef="let val" data-label="devolverPrograma">
+						<mat-checkbox  [(ngModel)]="val.ENVIAR_DAF">
+						</mat-checkbox>
+					</mat-cell>
+				</ng-container>
+
+				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+				<mat-row *matRowDef="let row; columns:  displayedColumns;"></mat-row>
+			</mat-table>
+			<mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="0" [pageSize]="5" showFirstLastButtons>
+			</mat-paginator>
+		</div>
+	</mat-card>
+
+	<mat-card>
+		<div class="btnAdd">
+			<button mat-fab color="primary" matTooltip="Exportar a Excel">
+				<img src="https://img.icons8.com/officexs/30/000000/xls.png">
+			</button>
+		</div>
+	</mat-card>
+	

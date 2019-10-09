@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="section-info-app" *ngIf="utils.displayNavbar">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+      <div fxFlex="50%" >
+           <button mat-icon-button (click)='utils.menuAction()'>
+            <mat-icon>menu</mat-icon>
+            </button> 
+          <span>Menu</span>
+      </div>
+      <div fxFlex="50%" class="aRight infoUser">
+        <span>{{AuthService.getUserName()}}</span>
+          <button mat-icon-button (click)="logout()">
+              <mat-icon aria-label="icon">exit_to_app</mat-icon>
+           </button>
+      </div>
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row  class="section-menu">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center" class="subnavbar">
+        <div fxFlex="1000%" class="subnavbar-logo">
+          <a [routerLink]="['/home']" class="logo">
+            <img src="https://servicios-desa.conicyt.cl/web//mantenedor-generico/assets/img/logo.png">
+            <span>Comisión Nacional <br />de Investigación Científica y Tecnológica</span>
+          </a>
+        </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

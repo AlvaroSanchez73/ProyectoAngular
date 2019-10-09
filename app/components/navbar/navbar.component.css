@@ -1,0 +1,15 @@
+.section-menu{ background: #fff; height: 73px; padding: 20px 15px; display: block; height: auto; border-bottom:1px solid #eee;}
+.section-menu .logo{ display: block; text-decoration: none !important}
+.section-menu .logo img{width:135px}
+.section-menu .logo span{ font-size: 12px; color: #4A4A4A; display: inline-block;
+                      font-size: 13px; font-weight: 500; line-height: 1.2; margin-top: 6px;
+                      margin-left: 10px; width: 350px;}
+
+.section-menu .menu{text-align: right;}
+.section-menu .menu button{color:initial !important; margin-top: 5px; }
+
+.section-info-app{padding:15px 20px; display:block; }
+.section-info-app a{color:#fff !important;}
+.section-info-app span{font-size: 16px}
+.section-info-app button{top:-2px;}
+.aRight{text-align: right;}

@@ -1,0 +1,80 @@
+<router-outlet></router-outlet>
+<mat-card>
+	<h2>Listado de Actividades</h2>
+	<mat-divider [inset]="true"></mat-divider>
+	<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" class="margin-top-10">
+		<div class="col-md-11" >
+			<app-filter-actividad></app-filter-actividad>
+		</div>
+		<div class="col-md-1" >
+			<button mat-raised-button color="primary" class="margin-top-10" (click)='changeEmit()'>Buscar</button>
+		</div>
+	</div>
+	
+	<div class="mat-elevation-z8">
+		<mat-table  [dataSource]="dataSource">
+	
+		<ng-container matColumnDef="postId">
+				<mat-header-cell *matHeaderCellDef>postID</mat-header-cell>
+				<mat-cell *matCellDef="let val" data-label="postId"> {{val.postId}} </mat-cell>
+		</ng-container>
+		
+		<ng-container matColumnDef="id">
+			<mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+			<mat-cell *matCellDef="let val" data-label="Id"> {{val.id}}</mat-cell>
+		</ng-container>
+	
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef> Nombre</mat-header-cell>
+			<mat-cell *matCellDef="let val" data-label="name"> {{val.na}} </mat-cell>
+		</ng-container>
+	
+		<ng-container matColumnDef="email">
+				<mat-header-cell *matHeaderCellDef> Correo</mat-header-cell>
+				<mat-cell *matCellDef="let val" data-label="correo"> {{val.email}} </mat-cell>
+			</ng-container>
+
+		<ng-container matColumnDef="body">
+			<mat-header-cell *matHeaderCellDef> Body</mat-header-cell>
+			<mat-cell *matCellDef="let val" data-label="Actor"> {{val.body}} </mat-cell>
+		</ng-container>
+		<!-- <ng-container matColumnDef="estado">
+			<mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+			<mat-cell *matCellDef="let val" data-label="Estado"> 
+				<mat-chip-list [ngStyle]="{'width':'100%'}">
+				<mat-chip selected [ngStyle]="{'background':val.color, 'width':'100%', 'text-align':'center','display':'block', 'margin':'0px'}">
+					{{val.estado}}
+				</mat-chip>
+			</mat-chip-list>
+			</mat-cell>
+		</ng-container>-->
+
+		<ng-container matColumnDef="acciones">
+			<mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+			<mat-cell *matCellDef="let val" data-label="Acciones">
+				<button mat-icon-button [matMenuTriggerFor]="menu">
+					<mat-icon>more_vert</mat-icon>
+				</button>
+				<mat-menu #menu="matMenu">
+					<app-actions-actividad></app-actions-actividad>
+				</mat-menu>
+			</mat-cell>
+		</ng-container>
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+		</mat-table>
+
+		<mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="20" [pageSize]="5" showFirstLastButtons></mat-paginator>
+	</div>
+</mat-card>
+
+<mat-card>	
+	<div class="btnAdd">
+		<button mat-fab color="primary" matTooltip="Nueva Actividad" [routerLink]="['/actividades/nuevo']" style="margin-right: 10px">
+			<mat-icon>add</mat-icon>
+			</button>
+			<button mat-fab color="primary" matTooltip="Exportar Actividades">
+			<mat-icon>get_app</mat-icon>
+			</button>
+	</div>
+</mat-card>

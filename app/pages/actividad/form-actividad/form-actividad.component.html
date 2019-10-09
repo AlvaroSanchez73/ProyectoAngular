@@ -1,0 +1,118 @@
+<form [formGroup]="actividad">
+			 <div class="container-form" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center">
+				<div fxFlex="33%">
+					<mat-form-field class="full">
+						<mat-label>Nombre de la Actividad</mat-label>
+					  <input matInput formControlName="nombre" maxlength="50">
+					</mat-form-field>
+				</div>
+				<div fxFlex="33%">
+					<mat-form-field>
+					  <mat-select placeholder="Concurso" formControlName="concurso">
+					    <mat-option *ngFor="let data of filter" [value]="data">
+					      {{data}}
+					    </mat-option>
+					  </mat-select>
+					</mat-form-field>
+				</div>
+				<div fxFlex="33%">
+					<mat-form-field>
+					  <mat-select placeholder="Categoria" formControlName="categoria">
+					    <mat-option *ngFor="let data of filter" [value]="data">
+					      {{data}}
+					    </mat-option>
+					  </mat-select>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="container-form" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center">
+				<div fxFlex="33%">
+					<mat-form-field class="full">
+						<mat-label>Tipo de Actividad</mat-label>
+					  <input matInput formControlName="tipoActividad" maxlength="50">
+					</mat-form-field>
+				</div>
+				<div fxFlex="33%">
+					<mat-form-field>
+					  <input matInput [matDatepicker]="picker" placeholder="Fecha de la Actividad" formControlName="fecha">
+					  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+					  <mat-datepicker #picker></mat-datepicker>
+					</mat-form-field>
+				</div>
+				<div fxFlex="33%">
+					<mat-form-field>
+					  <mat-select placeholder="Actividad con RUN o sin RUN" formControlName="tipoInscripcion"  (selectionChange)="changeRUN($event.value)">
+					    <mat-option *ngFor="let data of opcionesInscripcion" [value]="data.value">
+					      {{data.tipo}}
+					    </mat-option>
+					  </mat-select>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="container-form" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" *ngIf="!actividad.value.tipoInscripcion">
+				<div fxFlex="33%">
+					<mat-form-field class="full">
+						<mat-label>Cantidad Femenino </mat-label>
+					  <input type="number"matInput formControlName="cantidadFemenino" [(ngModel)]="cFem">
+					</mat-form-field>
+				</div>
+				<div fxFlex="33%">
+					<mat-form-field class="full">
+						<mat-label>Cantidad Masculino</mat-label>
+					  <input type="number" matInput formControlName="cantidadMasculino" [(ngModel)]="cMas">
+					</mat-form-field>
+				</div>
+				<div fxFlex="33%">
+					<mat-form-field class="full">
+						<mat-label>Total de Participantees</mat-label>
+					  <input matInput readonly="" [value]="cFem + cMas">
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="container-form" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="left">
+				<div fxFlex="33%">
+					<mat-form-field>
+					  <mat-select placeholder="Espacio de Realización de Actividad" formControlName="espacio">
+					    <mat-option *ngFor="let data of filter" [value]="data">
+					      {{data}}
+					    </mat-option>
+					  </mat-select>
+					</mat-form-field>
+				</div>
+				<div fxFlex="33%">
+					<mat-form-field>
+					  <mat-select placeholder="Publico Objetivo" formControlName="publico">
+					    <mat-option *ngFor="let data of filter" [value]="data">
+					      {{data}}
+					    </mat-option>
+					  </mat-select>
+					</mat-form-field>
+				</div>
+			</div>
+			<input type="file" id="antecedentes" (change)="fileChange($event.target.files)" hidden multiple>
+	  	</form>
+	  	<p class="mat-body-2"><b>También es posible agregar antecedentes a la actividad si usted lo cree necesario.</b></p>
+	  	<div class="upload-file init" *ngIf="antecedFiles.length == 0">
+			<mat-list *ngIf="antecedFiles.length == 0">
+				<mat-list-item>
+					<mat-icon mat-list-icon>insert_drive_file</mat-icon>
+				  	<h4 mat-line><b>No hay archivos cargados</b></h4>
+				    <p mat-line>Haga clic en el botón para iniciar</p>
+				 </mat-list-item>
+			</mat-list>
+		</div>
+		<div class="upload-file" *ngFor="let item of antecedFiles; let i = index">
+			<button mat-mini-fab color="warn" class="btnRmFile" (click)="removeFile(i)" matTooltip="Remover documento"><mat-icon>close</mat-icon></button>
+			<mat-list>
+			  <mat-list-item >
+			    <mat-icon mat-list-icon>insert_drive_file</mat-icon>
+			    <h4 mat-line>{{item.name}}</h4>
+			    <p mat-line>Tamaño: {{item.size}}</p>
+			  </mat-list-item>
+			</mat-list>
+		</div>
+		<button mat-fab mat-raised-button color="primary" matTooltip="Subir documentos" style="position:relative; top:-8px" (click)="openInputFile()">
+			<mat-icon>cloud_upload</mat-icon>
+		</button>
+	
+	

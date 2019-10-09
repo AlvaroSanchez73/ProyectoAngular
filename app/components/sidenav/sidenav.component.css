@@ -1,0 +1,20 @@
+.sidenav-content { display: flex; align-items: center; justify-content: center;}
+mat-list-item{border-bottom:1px solid #f1f2f2; font-size: 14px !important}
+mat-list-item:first-child{border-top:1px solid #f1f2f2;}
+.smtxt{font-weight: 700; padding:20px 20px 0px 20px; margin-bottom: 0px}
+.logo{ width: 120px; margin: 25px auto; display: block;}
+
+mat-list-item a{padding:15px 0px !important; display: block !important}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+ul{
+    list-style-type: none;
+    padding: 0%;
+    margin: auto;
+}
+li{
+    border-color:gray;
+}

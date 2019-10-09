@@ -1,0 +1,20 @@
+<router-outlet></router-outlet>
+<mat-card>
+		<h2>Declaración Básica</h2>
+		<mat-divider [inset]="true"></mat-divider>
+	<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" class="margin-top-10">
+			<app-declaracion-basica></app-declaracion-basica>
+		<div class="col-md-2">
+			<button mat-raised-button color="primary" style="margin-top: 10px; left: 10px"
+			 (click)='filterElements()'>buscar</button>
+		</div>
+	</div>
+</mat-card>
+<mat-card>
+		<h2>Personal</h2>
+		<mat-divider [inset]="true"></mat-divider>
+	<app-personal></app-personal>
+</mat-card>
+
+
+		
